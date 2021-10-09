@@ -33,4 +33,5 @@ jobs:
     - name: Build Kernel
       shell: bash
       run: |
+        LATEST_COMMIT_ID=$(git rev-parse HEAD:linux)
         ./build-linux.sh ./linux-${LATEST_COMMIT_ID} tinyconfig
