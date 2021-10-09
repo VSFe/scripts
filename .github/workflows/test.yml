@@ -1,0 +1,42 @@
+name: Run Test
+
+on:
+  push:
+    paths:
+      - 'test'
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Run ./install_deps.sh
+      shell: bash
+      run: |
+        ./install-deps.sh
+
+    - name: Download Zip
+      shell: bash
+      run: |
+        LATEST_COMMIT_ID=$(git rev-parse HEAD:linux)
+        wget https://github.com/vsfe/linux/archive/${LATEST_COMMIT_ID}.zip -O linux_kernel_lastest.zip
+
+    - name: Unpack Zip
+      shell: bash
+      run: |
+        unzip -q linux_kernel_lastest.zip
+
+    - name: Build Kernel
+      shell: bash
+      run: |
+        LATEST_COMMIT_ID=$(git rev-parse HEAD:linux)
+        ./build-linux.sh ./linux-${LATEST_COMMIT_ID} tinyconfig
+
+    - name: Test Kernel
+      shell: bash
+      run: |
+        make -C test
