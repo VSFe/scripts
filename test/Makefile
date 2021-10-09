@@ -5,4 +5,3 @@ all: $(executables)
 
 %.exe: %.c
 	$(CC) -o $@ $^
-
