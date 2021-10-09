@@ -33,4 +33,4 @@ jobs:
     - name: Build Kernel
       shell: bash
       run: |
-        ./build-linux.sh ./linux_kernel_lastest.zip tinyconfig
+        ./build-linux.sh ./linux_kernel_lastest tinyconfig
