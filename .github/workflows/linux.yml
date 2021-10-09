@@ -23,14 +23,14 @@ jobs:
       shell: bash
       run: |
         LATEST_COMMIT_ID=$(git rev-parse HEAD:linux)
-        wget https://github.com/vsfe/linux/archive/${LATEST_COMMIT_ID}.zip
+        wget https://github.com/vsfe/linux/archive/${LATEST_COMMIT_ID}.zip -O linux_kernel_lastest.zip
 
     - name: Unpack Zip
       shell: bash
       run: |
-        unzip -q ${LATEST_COMMIT_ID}.zip
+        unzip -q linux_kernel_lastest.zip
 
     - name: Build Kernel
       shell: bash
       run: |
-        ./build-linux.sh ./linux-${LATEST_COMMIT_ID} tinyconfig
+        ./build-linux.sh ./linux_kernel_lastest.zip tinyconfig
