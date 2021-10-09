@@ -3,7 +3,7 @@ name: Build Linux
 on:
   push:
     paths:
-      - 'linux/**'
+      - 'linux'
 
 jobs:
   build:
